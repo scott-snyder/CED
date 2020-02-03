@@ -160,7 +160,7 @@ static void set_world_size( float length) {
   axe[1][0] = WORLD_SIZE / 2. ;
   axe[2][1] = WORLD_SIZE / 2. ;
   axe[3][2] = WORLD_SIZE / 2. ;
-};
+}
 
 typedef GLfloat color_t[4];
 
@@ -684,9 +684,9 @@ void printShortcuts(void){
 
     int  world_size=1000; //static worldsize maybe will get problems in the future...
 
-    //glOrtho(0,w,h, 0,0,15*WORLD_SIZE);
+    //glOrtho(0,w,h, 0,0,15*WORLD_SIZE2);
 
-    //glOrtho(0,w,h,-10,0,15*WORLD_SIZE);
+    //glOrtho(0,w,h,-10,0,15*WORLD_SIZE2);
 
     glOrtho(0,w,h,-1*height,0,15*world_size);
 
@@ -2221,7 +2221,7 @@ void subReshape (int w, int h)
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity ();
   gluOrtho2D (0.0F, 1.0F, 0.0F, 1.0F);
-};
+}
 
 void writeString(char *str,int x,int y){
     int i;
@@ -2570,7 +2570,8 @@ void selectFromMenu(int id){ //hauke
 
         case BGCOLOR_USER:
             set_bg_color(userDefinedBGColor[0],userDefinedBGColor[1], userDefinedBGColor[2], userDefinedBGColor[3]);
-            [[fallthrough]];
+            break;
+
 
         case VIEW_RESET:
             setting.phi_projection = false; // no phi projection
