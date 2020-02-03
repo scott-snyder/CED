@@ -66,7 +66,12 @@ extern int selected_layer;
 //#define IS_VISIBLE(x) ((1<<((x>>8)&0xff))&ced_visible_layers)
 //#define IS_VISIBLE(x) ((x < (CED_MAX_LAYER-1) && x >= 0)?ced_visible_layers[x]:false)
 
-#define IS_VISIBLE(x) ((x < (CED_MAX_LAYER-1) && (int)x >= 0)?setting.layer[x]:false)
+inline
+bool IS_VISIBLE(int x)
+{
+  if (x < (CED_MAX_LAYER-1) && x >= 0) return setting.layer[x];
+  return false;
+}
 
 
 /*
@@ -693,8 +698,8 @@ void drawPartialCylinder(double length, double R /*radius*/, double iR /*inner r
                 //glBegin(GL_QUADS);
                 //glVertex3d(R*sin(phi2*2*PI/360.0), R*cos(phi2*2*PI/360.0),-length/2);
                 //glVertex3d(R*sin(phi2*2*PI/360.0), R*cos(phi2*2*PI/360.0),length/2);
-                //glVertex3d(R*x*sin((360.0-angle_cut_off)*2*PI/360.0), R*x*cos((360.0-angle_cut_off)*2*PI/360.0), length/2);
-                //glVertex3d(R*x*sin((360.0-angle_cut_off)*2*PI/360.0), R*x*cos((360.0-angle_cut_off)*2*PI/360.0), -length/2);
+                //glVertex3d(R*x2*sin((360.0-angle_cut_off)*2*PI/360.0), R*x2*cos((360.0-angle_cut_off)*2*PI/360.0), length/2);
+                //glVertex3d(R*x2*sin((360.0-angle_cut_off)*2*PI/360.0), R*x2*cos((360.0-angle_cut_off)*2*PI/360.0), -length/2);
                 //glEnd();
             }
 
@@ -2420,7 +2425,7 @@ static void ced_draw_legend(CED_Legend *legend){
 		break;
 		/** LIN */
 		case 'b':
-			strncpy( footer, "LIN", 4 );
+			strncpy( footer, "LIN", sizeof(footer) );
 			renderBitmapString(x_min-x_offset_legend,y_min-y_offset_legend, font, footer);
 			glEnd();
 		break;
