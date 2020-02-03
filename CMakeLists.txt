@@ -149,5 +149,6 @@ DISPLAY_STD_VARIABLES()
 
 
 # generate and install following configuration files
-GENERATE_PACKAGE_CONFIGURATION_FILES( CEDConfig.cmake CEDConfigVersion.cmake CEDLibDeps.cmake )
+GENERATE_PACKAGE_CONFIGURATION_FILES( CEDConfig.cmake CEDConfigVersion.cmake  )
 
+INSTALL (FILES ${PROJECT_SOURCE_DIR}/cmake/CEDLibDeps.cmake DESTINATION lib/cmake )
