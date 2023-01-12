@@ -1,0 +1,7 @@
+Bottom: 988d481aa33f5ba695b98e4d4b076cf787a7140c
+Top:    b30a82ba677fc2d09b89e831d8f6e687f41b420b
+Author: scott snyder <sss@karma>
+Date:   2020-02-03 00:24:41 -0500
+
+cmake LibDeps workaround
+
