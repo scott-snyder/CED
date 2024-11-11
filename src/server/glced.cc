@@ -2397,7 +2397,7 @@ void selectFromMenu(int id){ //hauke
             if(!ced_picking(popupmenu->x_click,popupmenu->y_click ,&mm.mv.x,&mm.mv.y,&mm.mv.z)){
                struct __glutSocketList *sock;
                sock=__glutSockets;
-               int id = SELECTED_ID;
+               int selid = SELECTED_ID;
                //printf(" ced_get_selected : socket connected: %d", sock->fd );
                if(client_connected){
                     send( sock->fd , &selid , sizeof(int) , 0 );
