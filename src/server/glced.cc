@@ -605,10 +605,7 @@ void printShortcuts(void){
     char label[CED_MAX_LAYER_CHAR+128];
 
     for(i=0;i<NUMBER_DATA_LAYER;i++){
-        char desc[CED_MAX_LAYER_CHAR+1];
-        memcpy (desc, layerDescription[i], CED_MAX_LAYER_CHAR);
-        desc[CED_MAX_LAYER_CHAR] = '\0';
-        snprintf(label,sizeof(label), "(%s) [%c] %s%i: %s", isLayerVisible(i)?"X":"_",layer_keys[i], (i<10)?"0":"", i, desc);
+        snprintf(label,sizeof(label), "(%s) [%c] %s%i: %.*s", isLayerVisible(i)?"X":"_",layer_keys[i], (i<10)?"0":"", i, CED_MAX_LAYER_CHAR, layerDescription[i]);
         if(strlen(label) >= MAX_STR_LEN){
             label[MAX_STR_LEN-3]='.';
             label[MAX_STR_LEN-2]='.';
