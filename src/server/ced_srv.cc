@@ -495,6 +495,7 @@ void drawPartialLineCylinder(double length, double R /*radius*/, double iR /*inn
  */
 
 struct my_point {
+                my_point(double the_x, double the_y) : x(the_x), y(the_y) {}
                 double x;
                 double y;
                 };
