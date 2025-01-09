@@ -3678,33 +3678,27 @@ void buildLayerMenus(void){
     char tmp[max+1];
     for(i=0;i<NUMBER_POPUP_LAYER;i++){
 //        std::cout << "description: " << layerDescription[i] << std::endl;
-        char desc[CED_MAX_LAYER_CHAR+1];
-        memcpy (desc, layerDescription[i], CED_MAX_LAYER_CHAR);
-        desc[CED_MAX_LAYER_CHAR] = '\0';
-        if(strlen(desc) > max-1){
-            memcpy (tmp, desc, max-3);
+        if(strlen(layerDescription[i]) > max-1){
+            memcpy (tmp, layerDescription[i], max-3);
             strcpy (tmp+max-3, "...");
         }else{
-            sprintf(tmp,"%s",desc);
+            sprintf(tmp,"%s",layerDescription[i]);
         }
 
-        sprintf(str,"%s %s%i [%c]: %s", isLayerVisible(i)?"[X]":"[ ]", (i < 10)?"  ":"" ,i, layer_keys[i], tmp);
+        snprintf(str,sizeof(str),"%s %s%i [%c]: %s", isLayerVisible(i)?"[X]":"[ ]", (i < 10)?"  ":"" ,i, layer_keys[i], tmp);
         //std::cout << str << std::endl;
         datalayermenu->addItem(new CED_SubSubMenu(str,LAYER_0+i));
     }
     for(i=NUMBER_DATA_LAYER;i<NUMBER_DETECTOR_LAYER+NUMBER_DATA_LAYER;i++){
         //sprintf(str,"Detector Layer %s%i [%c]: %s", (i < 10)?"  ":"" ,i, layer_keys[i], layerDescription[i]);
-        char desc[CED_MAX_LAYER_CHAR+1];
-        memcpy (desc, layerDescription[i], CED_MAX_LAYER_CHAR);
-        desc[CED_MAX_LAYER_CHAR] = '\0';
-        if(strlen(desc) > max){
-            memcpy (tmp, desc, max-3);
+        if(strlen(layerDescription[i]) > max){
+            memcpy (tmp, layerDescription[i], max-3);
             strcpy (tmp+max-3, "...");
         }else{
-            sprintf(tmp,"%s",desc);
+            sprintf(tmp,"%s",layerDescription[i]);
         }
 
-        snprintf(str,sizeof(str),"%s %s%i: %s", isLayerVisible(i)?"[X]":"[ ]",(i < 10)?"  ":"" ,i, desc);
+        snprintf(str,sizeof(str),"%s %s%i: %s", isLayerVisible(i)?"[X]":"[ ]",(i < 10)?"  ":"" ,i, tmp);
         detectorlayermenu->addItem(new CED_SubSubMenu(str,DETECTOR1+i-NUMBER_DATA_LAYER));
     }
 
