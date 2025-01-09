@@ -2424,7 +2424,7 @@ static void ced_draw_legend(CED_Legend *legend){
 		break;
 		/** LIN */
 		case 'b':
-			strncpy( footer, "LIN", sizeof(footer) );	
+			strncpy( footer, "LIN", sizeof(footer) );
 			renderBitmapString(x_min-x_offset_legend,y_min-y_offset_legend, font, footer);
 			glEnd();
 		break;
