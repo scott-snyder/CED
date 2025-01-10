@@ -1,0 +1,6 @@
+Bottom: 95bd91ec3d1d4f6a5d5388e3534bf9f36e43033d
+Top:    95bd91ec3d1d4f6a5d5388e3534bf9f36e43033d
+Author: sss <sss@karma>
+Date:   2025-01-09 22:05:21 -0500
+
+Fix -Weffc++ warnings.
