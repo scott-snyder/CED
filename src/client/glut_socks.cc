@@ -2,7 +2,7 @@
  * Server (GLUT) side. 
  *
  * Alexey Zhelezov, DESY/ITEP, 2005 
- * July 2005, Jörgen Samson: small fix to keep
+ * July 2005, JÃ¶rgen Samson: small fix to keep
  *            TCP/IP connection alive if data
  *            is temporary not available
  */
