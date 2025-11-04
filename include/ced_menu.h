@@ -275,12 +275,10 @@ class CED_SubSubMenu{
             subsub->y_end  =y_end + height;
             subsubMenus.push_back(subsub);
         }
-        CED_SubSubMenu(string t, int nr=0){
-            title=t;
-            optionNr=nr;
-            isExtend=false;
-            isMouseOver=false;
-            dead=false;
+        CED_SubSubMenu(string t, int nr=0)
+          : title(t),
+            optionNr(nr)
+        {
         }
         ~CED_SubSubMenu(){
             if(dead == true){
@@ -438,12 +436,10 @@ class CED_SubMenu{
             subsubMenus.push_back(subsub);
 
         }
-        CED_SubMenu(string t, int nr=0){
-            title=t;
-            optionNr=nr;
-            isExtend=false;
-            isMouseOver=false;
-            selected_submenu=NULL;
+        CED_SubMenu(string t, int nr=0)
+          : title(t),
+            optionNr(nr)
+        {
         }
         ~CED_SubMenu(){
             for(int i=0;(unsigned) i<subsubMenus.size();i++){
@@ -595,8 +591,9 @@ class CED_Menu{
             subMenus.push_back(sub);
             x_offset+=5;
         }
-        CED_Menu(){
-            x_offset=1;
+        CED_Menu()
+          : x_offset(1)
+        {
         }
         ~CED_Menu(){
             cout << "delete ced menu" <<  endl;
@@ -755,14 +752,10 @@ class CED_PopUpMenu{
             subsubMenus.push_back(subsub);
 
         }
-        CED_PopUpMenu(string t, int nr=0){
-            title=t;
-            optionNr=nr;
-            isExtend=false;
-            isMouseOver=false;
-            selected_submenu=NULL;
-            //click_x=
-            //click_y=
+        CED_PopUpMenu(string t, int nr=0)
+          : title(t),
+            optionNr(nr)
+        {
         }
 
         CED_PopUpMenu(const CED_PopUpMenu&) = delete;
