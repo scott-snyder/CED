@@ -150,6 +150,9 @@ In any Processor:
 		//	      float x1,float y1,float z1,
 		//	      unsigned type,unsigned width,unsigned color);
 
+        // hit rendering is delayed by the time "t" (in seconds). Produce animation effect. "Show FPS" must be switched on.
+		// void ced_hit_ID_animate(float x,float y,float z, float t, unsigned type, unsigned size, unsigned color, unsigned id);
+
 
 to define colors is better use gimp - it gives that crasy numbers easily
 
@@ -178,9 +181,79 @@ to define colors is better use gimp - it gives that crasy numbers easily
 		// at the end of event 
 		  ced_draw_event();    // Make clean up screen before drawing
 
+## Using the CED client library with EDM4hep files in python:
+
+One must use key4hep environment, e.g.:
+```bash
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
+# or
+# source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+```
+
+```python
+import os
+import cppyy
+from podio import root_io
+
+# User Config
+COMPACT_PATH="<path-to-compact-file>"
+EDM4HEP_FILE = "<path-to-edm4hep-file>"
+TRACKER_HIT_COLS = ["<name-of-tracker-hit-col-1>", "<name-of-tracker-hit-col-2>", "<...>"]
+CALO_HIT_COLS = ["<name-of-calo-hit-col-1>", "<name-of-calo-hit-col-2>", "<...>"]
+
+# Load dependencies
+for path in os.environ["CMAKE_PREFIX_PATH"].split(":"):
+    inlcude_dir = os.path.join(path, "include")
+    if os.path.isdir(inlcude_dir):
+        cppyy.add_include_path( inlcude_dir )
+
+    if "/marlinutil/" in path:
+        cppyy.add_include_path( os.path.join(path, "include", "marlinutil") )
+
+cppyy.include("ced_cli.h")
+cppyy.include("DDMarlinCED.h")
+from cppyy.gbl import ced_client_init, ced_register_elements
+from cppyy.gbl import ced_new_event, ced_send_event, ced_selected_id_noblock
+from cppyy.gbl import ced_hit_ID, ced_hit_ID_animate, CED_HIT_POINT
+std = cppyy.gbl.std
+DDMarlinCED = cppyy.gbl.DDMarlinCED
+
+det_compact_file = os.path.join( os.environ["k4geo_DIR"], COMPACT_PATH )
+detector = cppyy.gbl.dd4hep.Detector.getInstance()
+detector.fromCompact(det_compact_file)
+
+ced_client_init("localhost", 7286)
+ced_register_elements()
+
+reader = root_io.Reader(EDM4HEP_FILE)
+for event in reader.get("events"):
+    ced_new_event()
+
+    DDMarlinCED.drawDD4hepDetector( detector, False, std.vector[std.string]() )
+
+    layer = 1  # layer under which hits are displayed
+    animated_layer = 2
+    size = 5  # size of the hits
+    color = 0x000000  # hex color of the hits
+    # Draw all reconstructed hits in layer #1 and animate them in layer #2
+    for col in TRACKER_HIT_COLS + CALO_HIT_COLS:
+        for hit in event.get(col):
+            pos = hit.getPosition()
+            t = hit.getTime()
+            ced_hit_ID(pos.x, pos.y, pos.z, CED_HIT_POINT, layer, size, color, 0)
+            ced_hit_ID_animate(pos.x, pos.y, pos.z, t, CED_HIT_POINT, animated_layer, size, color, 0)
+
+    ced_send_event()
+
+    # ced_selected_id_noblock() can be used to return id of the picked object.
+    # A more involved example with kbhit instead of pyhton's input() would be needed to use it.
+    # picked_id = ced_selected_id_noblock()
+
+    input("Press enter to draw next event")
+```
 
 ## License and Copyright
-Copyright (C) 2005-2017, CED Authors
+Copyright (C) 2005-2026, CED Authors
 
 CED is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

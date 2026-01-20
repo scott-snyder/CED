@@ -96,6 +96,8 @@ int ced_picking(int x,int y,GLfloat *wx,GLfloat *wy,GLfloat *wz); //from ced_srv
 
 
 //*************** global variables ***************************************//
+int animation_start_time = 0;
+int animate_layer = -1;
 //for new angles add the new angle to this list and to define in ced_menu.h
 static int available_cutangles[]={0,30,45,90,100,135,120,150,170,180,190,200,220,240,260,270,280,290,310,330,340};
 int last_selected_layer;
@@ -560,6 +562,41 @@ std::string formatShortcut(int iLayer, const char key, const char *description,
 
   return truncateTo(sstr.str(), max_len);
 }
+void printEventTime(void){
+    if( animate_layer < 0 ) return;
+
+    //calculate event time:
+    float elapsed_time = 0.001*( glutGet(GLUT_ELAPSED_TIME) - animation_start_time); // in seconds, but physicswise should be in ns
+    char text[42];
+    sprintf(text, "Event time: %.3f ns", elapsed_time);
+    double dark = 1.-(setting.bgcolor[0]+setting.bgcolor[1]+setting.bgcolor[2]) / 3.0;
+    
+    //print on screen:
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    GLfloat w=glutGet(GLUT_SCREEN_WIDTH);
+    GLfloat h=glutGet(GLUT_SCREEN_HEIGHT);
+    glOrtho(-WORLD_SIZE*w/h,WORLD_SIZE*w/h,-WORLD_SIZE,WORLD_SIZE, -15*WORLD_SIZE,15*WORLD_SIZE);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glColor3f(dark,dark,dark);
+    drawHelpString(text, -600, -950);
+
+
+    glEnd();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
+
 
 void printShortcuts(void){
 
@@ -776,6 +813,7 @@ static void display(void){
     ced_menu->draw();
     popupmenu->draw();
     printFPS();
+    printEventTime();
 
     if(setting.light==true){
         glEnable(GL_LIGHTING);
@@ -4524,6 +4562,9 @@ int main(int argc,char *argv[]){
 
 
 
+    //future calls give time relative to this.
+    glutGet(GLUT_ELAPSED_TIME); // time since glutInit()
+    animation_start_time = glutGet(GLUT_ELAPSED_TIME); // time since first glutGet(GLUT_ELAPSED_TIME)
 
     glutMainLoop();
     return 0;

@@ -34,6 +34,7 @@ void ced_hit_ID(float x,float y,float z,unsigned type,unsigned layer, unsigned s
  h->p.x=x;
  h->p.y=y;
  h->p.z=z;
+ h->time=0;
  h->type=type;
  // if(layer > 255){ //downward compability
  //    h->layer=layer >> CED_LAYER_SHIFT;
@@ -44,6 +45,22 @@ void ced_hit_ID(float x,float y,float z,unsigned type,unsigned layer, unsigned s
  h->color=color;
  h->lcioID=lcioID;
 }
+
+void ced_hit_ID_animate(float x,float y,float z,float t, unsigned type,unsigned layer, unsigned size,unsigned color, unsigned lcioID){
+ CED_Hit *h=(CED_Hit *)ced_add(HIT_ID);
+ if(!h) return;
+ h->p.x=x;
+ h->p.y=y;
+ h->p.z=z;
+ h->time=t;
+ h->type=type;
+ h->layer=layer;
+ h->size=size;
+ h->color=color;
+ h->lcioID=lcioID;
+}
+
+
 
 /*
  * Line element

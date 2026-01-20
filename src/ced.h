@@ -121,6 +121,8 @@ struct CEDsettings{
     int autoshot_scale; // If true, generate screencapture in every new event
 };
 
+extern int animation_start_time; // in ms
+extern int animate_layer;
 /*
 //important: 
 //          - sum of all layers must be smaler than max_layer!

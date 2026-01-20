@@ -129,6 +129,7 @@ typedef enum {
 
 typedef struct {
   CED_Point p;
+  float time; // allows event animation
   unsigned type;  // point, star, etc
   unsigned layer; //layer
   unsigned color; // in ARGB form (so, 0xff0000 is RED)
@@ -143,6 +144,8 @@ void ced_hit_ID_old(float x,float y,float z,unsigned type, unsigned size,unsigne
 
 
 void ced_hit_ID(float x,float y,float z,unsigned type,unsigned layer, unsigned size,unsigned color, unsigned lcioID);
+
+void ced_hit_ID_animate(float x,float y,float z,float t, unsigned type,unsigned layer, unsigned size,unsigned color, unsigned lcioID);
 
 /*
  * Line element
