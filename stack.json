@@ -1,13 +1,13 @@
 {
   "version": 5,
-  "prev": "533998547cc1013dc06457dddc23abd9fa12bc24",
-  "head": "a1ff1078d0354cc4aba9a71b7f182aac414b2c5f",
+  "prev": "5544458e909435c8756169627a48d7dd5fa79b14",
+  "head": "3f2a4f855826dc9e609c58c978955712c7e3287b",
   "applied": [
     "gitignore",
-    "LibDeps"
+    "LibDeps",
+    "utf8"
   ],
   "unapplied": [
-    "utf8",
     "warn",
     "effc"
   ],
