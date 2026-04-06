@@ -1,36 +1,35 @@
 {
   "version": 5,
-  "prev": "22775230478705d0c53d85b44527e81dd83aeb1f",
-  "head": "a1ff1078d0354cc4aba9a71b7f182aac414b2c5f",
+  "prev": "bb4b94660afd66c5b5bbad9b686c2960ed0c8798",
+  "head": "1f053c28e2ee739e6581552ab4141e9925e85c7c",
   "applied": [
     "gitignore",
-    "LibDeps"
-  ],
-  "unapplied": [
+    "LibDeps",
     "warn",
     "effc",
     "utf8",
     "cmakewarn"
   ],
+  "unapplied": [],
   "hidden": [],
   "patches": {
     "LibDeps": {
       "oid": "a1ff1078d0354cc4aba9a71b7f182aac414b2c5f"
     },
     "cmakewarn": {
-      "oid": "3afbed3f9818fb232b800e917b7acc2f23e735be"
+      "oid": "1f053c28e2ee739e6581552ab4141e9925e85c7c"
     },
     "effc": {
-      "oid": "294be21aacdb939122c4cac2331247bcc3d82b12"
+      "oid": "f855d26e7526403c307addb8eb55b3fb0f277862"
     },
     "gitignore": {
       "oid": "0f3e5a76823b7e43ad8ae844f0dfd40b89492478"
     },
     "utf8": {
-      "oid": "92be060bcad0ce15a221a92ccb73e671cb247aa5"
+      "oid": "9e4ad22419b2100868a2f067307b65cf5fea801f"
     },
     "warn": {
-      "oid": "ee7e9225caafd92b5a9dc4080fef58a567e9572d"
+      "oid": "740dbecc827c49442ab82b378ac55b6a5766cc34"
     }
   }
 }
