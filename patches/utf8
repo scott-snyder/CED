@@ -1,8 +1,0 @@
-Bottom: a68c4cae36b19ca4413846a643bc1372ed25f025
-Top:    a68c4cae36b19ca4413846a643bc1372ed25f025
-Author: sss <sss@karma>
-Date:   2026-04-09 11:00:30 -0400
-
-Convert form latin-1 encoding to utf-8.
-
-Avoids a warning from clang.
